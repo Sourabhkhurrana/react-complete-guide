@@ -33,7 +33,7 @@ class App extends Component {
       ...this.state.Person[personIndex]
     }
 
-    person.name = event.target.value;
+    person.name = event.input.value;
 
     const persons = [...this.state.Person];
     persons[personIndex] = person;
@@ -63,22 +63,22 @@ class App extends Component {
       persons = (
         <div>
           {this.state.Person.map((person, index) => {
-            return <Person 
+            return <Person
               click={() => this.deletePersonHandeler(index)}
-              name={ person.name } 
+              name={ person.name }
               age={ person.age }
-              key={ person.id } 
+              key={ person.id }
               changed={(event) => this.nameChangedHandeler(event, person.id)}/>
           })}
-          {/* <Person 
-              name={ this.state.Person[0].name } 
+          {/* <Person
+              name={ this.state.Person[0].name }
               age={ this.state.Person[0].age }/>
-          <Person 
-              name={ this.state.Person[1].name } 
+          <Person
+              name={ this.state.Person[1].name }
               age={ this.state.Person[1].age }
               changed={this.nameChangedHandeler}>Hello From neeraj</Person>
-          <Person 
-              name={ this.state.Person[2].name } 
+          <Person
+              name={ this.state.Person[2].name }
               age={ this.state.Person[2].age }
               click={this.switchNameHandeler.bind(this,"Ram Gopal verma")}/> */}
         </div>
@@ -100,7 +100,7 @@ class App extends Component {
         <h1>Hi i am react !</h1>
         <p className={classes.join(' ')}>Hello Again paragraph</p>
         <button
-          className={btnClass} 
+          className={btnClass}
           onClick={this.togglePersonHandeler}>Switch Name</button>
           {persons}
         </div>
