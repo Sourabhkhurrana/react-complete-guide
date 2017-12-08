@@ -5,13 +5,48 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-  state = {
-    Person:[
-      { id: 'as1', name:"Sourabh", age:24 },
-      { id: 'as2', name:"Neeraj", age:23 },
-      { id: 'as3', name:"Mudit", age:27 }
-    ]
+  constructor( props ){
+    super(props);
+    console.log("[App.js] inside constructor", props);
+    this.state = {
+        Person:[
+          { id: 'as1', name:"Sourabh", age:24 },
+          { id: 'as2', name:"Neeraj", age:23 },
+          { id: 'as3', name:"Mudit", age:27 }
+        ],
+        showPersons: false
+      }
   }
+
+  componentWillMount () {
+    console.log("[App.js] componentWillMount!!!");
+  }
+
+  componentDidMount () {
+    console.log("[App.js] componentDidLast ");
+  }
+
+  shouldComponentUpdate (nextProp, nextState) {
+    console.log("[update App.js] shouldComponentUpdate", nextProp, nextState);
+    return true;
+  }
+
+  componentWillUpdate (nextProps, nextState){
+    console.log("[update App.js] componentWillUpdate", nextProps, nextState);
+  }
+
+  componentDidUpdate (nextProps, nextState){
+    console.log("[update App.js] componentDidUpdate", nextProps, nextState);
+  }
+
+
+  // state = {
+  //   Person:[
+  //     { id: 'as1', name:"Sourabh", age:24 },
+  //     { id: 'as2', name:"Neeraj", age:23 },
+  //     { id: 'as3', name:"Mudit", age:27 }
+  //   ]
+  // }
 
   switchNameHandeler = (name) => {
     this.setState({
@@ -33,7 +68,7 @@ class App extends Component {
       ...this.state.Person[personIndex]
     }
 
-    person.name = event.input.value;
+    person.name = event.target.value;
 
     const persons = [...this.state.Person];
     persons[personIndex] = person;
@@ -54,6 +89,8 @@ class App extends Component {
   }
 
   render() {
+
+    console.log(" [App.js] inside render method");
 
     let persons = null;
 
@@ -87,7 +124,10 @@ class App extends Component {
 
     return (
         <div className={Classes.App}>
-          <Cockpit  showPerson={this.state.showPersons}
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Person</button>
+          <Cockpit
+            appTitle={this.props.appTitle}
+            showPerson={this.state.showPersons}
             persons={this.state.Person}
             clicked={this.togglePersonHandeler}/>
           {persons}
